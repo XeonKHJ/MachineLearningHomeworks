@@ -18,11 +18,11 @@ W{1} = randn(401, 15)/10;
 W{2} = randn(16, 10)/10;
 
 % 学习率
-learningRate = 10;
+learningRate = 0.00001;
 
 %随机生成权重；
 
-while loss > 1
+while loss > 0.01
     %先前传播
     [pY, A] = forwardPropagation(neuralSize, X, W);
 
@@ -31,7 +31,8 @@ while loss > 1
 
     %向后传播计算梯度
     gd = backPropagation(A, W, pY, y);
-
+    
     %梯度下降
-    weights = weights - learningRate * gd;
+    W{1} = W{1} - learningRate * gd{1};
+    W{2} = W{2} - learningRate * gd{2};
 end

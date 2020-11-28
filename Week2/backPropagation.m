@@ -15,20 +15,22 @@ end
 
 % 计算输出层误差
 % BP1
+tempc = softmax(pY);
+LossL = (Y./(pY*log(10))).*(tempc .*(tempc - 1));
 
-tempc = crossEntropy(pY, y);
-lossL = (Y./(pY*log(10))).*(tempc .*(tempc - 1));
-
+%反向传播
 % BP2
-AbiggerThan1 = A>1;
-Loss2 = (w2' * lossL) .* AbiggerThan1(:,2);
-Loss1 = (w1' * loss2) .* AbiggerThan1(:,1);
+A2biggerThan0 = A{2} >0;
+A1biggerThen0 = A{1} > 0;
+Loss2 = ( LossL * w2') .* A2biggerThan0(:,2);
+Loss1 = ( Loss2(:,2:end) * w1' ) .* A1biggerThen0(:,1);
 
+%计算梯度
 %BP3
+gradients2 = A{2}' * LossL;
+gradients1 = A{1}' * Loss2(:,2:end);
 
-%BP4
-gradients = zeros(size(W));
-gradients = A;
+gradients = {gradients1, gradients2};
 
 end
 

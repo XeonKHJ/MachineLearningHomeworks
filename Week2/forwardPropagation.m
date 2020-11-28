@@ -22,7 +22,7 @@ A2 = relu(Z2);
 %Мо1
 A2 = [ones([size(A2,1), 1]), A2];
 
-Z3 = A2 * W2
+Z3 = A2 * W2;
 A3 = relu(Z3);
 
 pY = softmax(A3);
