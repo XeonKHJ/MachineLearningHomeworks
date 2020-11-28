@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# mat文件不要了
+*.mat
+*.jpg
+
 # User-specific files
 *.rsuser
 *.suo
