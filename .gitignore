@@ -6,6 +6,7 @@
 # mat文件不要了
 *.mat
 *.jpg
+*.asv
 
 # User-specific files
 *.rsuser

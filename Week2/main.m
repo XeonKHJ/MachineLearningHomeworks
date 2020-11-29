@@ -9,26 +9,44 @@ Y = y;
 
 loss = Inf;
 
+% 拿训练集
+
+% 拿测试机
+XY = [X Y];
+r=randperm( size(XY,1) );
+shuffledXY = XY(r, :);
+
+testSet = shuffledXY(4000:5000, 1:end-1);
+testSetY = shuffledXY(4000:5000, end);
+X = shuffledXY(1:4000, 1:end-1);
+Y = shuffledXY(1:4000, end);
+y = Y;
+
+imageWidth = 20;
+imageHeight = 20;
+inputLayerSize = imageWidth * imageHeight;
+
 % 获取权重大小
 weightSize = [];
-neuralSize = [400, 15, 10]
-W = {[401, 15], [16, 10]}; 
+neuralSize = [inputLayerSize, 15, 10];W
+W = {[inputLayerSize + 1, 15], [16, 10]}; 
 
-W{1} = randn(401, 15)/10;
-W{2} = randn(16, 10)/10;
+W{1} = randn(401, 15);
+W{2} = randn(16, 10);
 
+m = size(X, 1);
 % 学习率
-learningRate = 0.00001;
+learningRate = 0.25;
 
 %随机生成权重；
 
-while loss > 0.01
+while loss > 5.0000e-04
     %先前传播
-    [pY, A] = forwardPropagation(neuralSize, X, W);
+    [pY, A, Z] = forwardPropagation(neuralSize, X, W);
 
     %计算损失函数
-    loss = crossEntropy(pY, y);
-
+    %loss = squareMean(pY, y)/size(y, 1)
+    loss = crossEntropy(pY, y) / m
     %向后传播计算梯度
     gd = backPropagation(A, W, pY, y);
     
@@ -36,3 +54,11 @@ while loss > 0.01
     W{1} = W{1} - learningRate * gd{1};
     W{2} = W{2} - learningRate * gd{2};
 end
+
+%测试
+[pY, A, Z] = forwardPropagation(neuralSize, testSet, W);
+[maxValues, maxIndex] = max(pY,[], 2);
+accu = sum(maxIndex == testSetY) / size(testSetY, 1);
+disp("准确率为：");
+disp(accu);
+
