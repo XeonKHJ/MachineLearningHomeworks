@@ -11,7 +11,7 @@ m = size(y, 1);
 Y = zeros(size(pY,1), 10);
 
 for row = 1:size(pY,1)
-    Y(row, y(row)) = 1;
+    Y(row, y(row) + 1) = 1;
 end
 
 % 计算输出层误差
@@ -19,7 +19,7 @@ end
 tempc = softmax(pY);
 crossEntropyPrim = Y./pY;
 %LossL = (Y./(pY*log(10))).*(tempc .*(tempc - 1));
-LossL = pY - Y;
+LossL = Y -pY;
 
 %反向传播
 % BP2

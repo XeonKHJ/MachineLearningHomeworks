@@ -7,7 +7,7 @@ function H = crossEntropy(pY, y)
 Y = zeros(size(pY,1), 10);
 
 for row = 1:size(pY,1)
-    Y(row, y(row)) = 1;
+    Y(row, y(row) + 1 ) = 1;
 end
 
 H = (-1) * sum(Y .* log(pY), 'all');

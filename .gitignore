@@ -7,6 +7,8 @@
 *.mat
 *.jpg
 *.asv
+*.zip
+*.pgm
 
 # User-specific files
 *.rsuser
