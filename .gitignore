@@ -9,6 +9,7 @@
 *.asv
 *.zip
 *.pgm
+*.data
 
 # User-specific files
 *.rsuser
