@@ -1,8 +1,8 @@
 [X, y] = readData();
 
 dictSize = [40, 30];
-dataSize = 1;
-X = X(1,:);
+dataSize = 40;
+X = X(1:dataSize,:);
 % 在这个数据集里p是112*92=10304，要提取的特征数为k，肯定要比10304小。
 p = 10304;
 
@@ -41,6 +41,10 @@ while true
     %固定A，求解B
     B = ((X')*(A'))/(A*A' ); 
     
+    %损失：
     L = (sum((X'-(B*A)).^2, 'all') + lambda * sum(abs(A), 'all'))/(10304 * dataSize) 
+    
+    %翻译回来后与原来的方差：
+    meansqure = sum((X'-(B*A)).^2, 'all') / dataSize
     count = count+1;
 end

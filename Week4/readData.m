@@ -12,7 +12,7 @@ for i = 1 : 40
     % 从文件夹中读取数据
     for j = 1:10
         fileName = strcat(num2str(j), '.pgm');
-        x = (imread(strcat(pathName, fileName)));
+        x = im2double(imread(strcat(pathName, fileName)));
         x = reshape(x, 1, 10304);
         
         index = (i-1)*10 + j;
