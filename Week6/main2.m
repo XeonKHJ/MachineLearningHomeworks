@@ -22,3 +22,4 @@ for i = 1:100
     sigmasquare = ((sum(pcx.*((repmat(X, 1, size(miu, 1))-miu').^2))./sum(pcx))')
     pc = ((1/size(X,1)) * sum(pcx))';
 end
+i = 1

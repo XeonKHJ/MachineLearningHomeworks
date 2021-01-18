@@ -8,7 +8,7 @@ testSet = X(100:200, :);
 %X = X(1:dataSize,:);
 
 %要提取维度k
-k = 400;
+k = 8;
 
 %居中
 meanX = mean(X, 1);
